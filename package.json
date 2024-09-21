@@ -1,0 +1,39 @@
+{
+  "name": "discord-webpanel",
+  "version": "0.2.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "clsx": "^2.1.1",
+    "destack": "^3.0.7",
+    "discord.js": "^14.16.2",
+    "framer-motion": "^11.5.4",
+    "lucide-react": "^0.441.0",
+    "next": "14.2.11",
+    "npm": "^10.8.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-fontawesome": "^1.7.1",
+    "react-icons": "^5.3.0",
+    "tailwind-merge": "^2.5.2",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.11",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
