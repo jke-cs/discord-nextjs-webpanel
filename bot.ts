@@ -324,19 +324,18 @@ class DiscordBot {
       return;
     }
   
-    // Remove user's previous vote if any
     for (const [index, voters] of pollData.votes.entries()) {
       if (voters.has(interaction.user.id)) {
         voters.delete(interaction.user.id);
       }
     }
   
-    // Add user's new vote
+    
     const optionVoters = pollData.votes.get(optionIndex) || new Set();
     optionVoters.add(interaction.user.id);
     pollData.votes.set(optionIndex, optionVoters);
   
-    // Update poll message
+
     const updatedEmbed = new EmbedBuilder()
       .setColor('#0099ff')
       .setTitle('📊 ' + pollData.question)
@@ -348,7 +347,7 @@ class DiscordBot {
   
     await interaction.update({ embeds: [updatedEmbed] });
     
-    // Send a confirmation message to the user
+
     await interaction.followUp({ 
       content: `You voted for: ${pollData.options[parseInt(optionIndex)]}`, 
       ephemeral: true 
@@ -358,15 +357,13 @@ class DiscordBot {
   private async playRockPaperScissors(message: Message, userChoice: string) {
     const userId = message.author.id;
     
-    // Check if the user is on cooldown
     if (this.rpsCommandCooldown.has(userId)) {
-      return; // Silently ignore the command if the user is on cooldown
+      return;
     }
 
-    // Add user to cooldown set
+
     this.rpsCommandCooldown.add(userId);
 
-    // Remove user from cooldown after 3 seconds
     setTimeout(() => {
       this.rpsCommandCooldown.delete(userId);
     }, 3000);
@@ -415,15 +412,13 @@ class DiscordBot {
     const userData = await this.getUserData(userId);
     const oldLevel = userData.level;
     userData.xp += amount;
-    
-    // Check for level up
+
     const newLevel = this.calculateLevel(userData.xp);
     if (newLevel > oldLevel) {
       userData.level = newLevel;
       await this.announceLevelUp(userId, newLevel, channel);
     }
 
-    // Update the user's name in case it has changed
     const user = await this.client.users.fetch(userId);
     userData.name = user.username;
 
@@ -458,7 +453,7 @@ class DiscordBot {
         return typeof this.levelThresholds[i].level === 'number' ? this.levelThresholds[i].level : 6; // 6 for 'Master'
       }
     }
-    return 1; // Default to level 1 if something goes wrong
+    return 1; 
   }
 
   private async getUserData(userId: string): Promise<UserData> {
@@ -486,7 +481,6 @@ class DiscordBot {
       if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
         console.error('Error loading user data:', error);
       }
-      // If the file doesn't exist or there's an error, we'll start with an empty Map
       this.userData = new Map();
     }
   }
